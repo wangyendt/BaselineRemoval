@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 class BaselineRemoval:
     def __init__(self):
-        self.lam = 1e9  # 1e2 - 1e9
+        self.lam = 1e5  # 1e2 - 1e9
         self.p = 1e-3  # 1e-3 - 1e-1
 
     @staticmethod
@@ -29,10 +29,18 @@ class BaselineRemoval:
 
 
 if __name__ == '__main__':
-    x = np.arange(-10, 10, 0.1)
-    y = np.exp(-x ** 2 / 2)
+    # x = np.arange(-10, 10, 0.1)
+    # y = np.exp(-x ** 2 / 2)
+    # br = BaselineRemoval()
+    # base_y = br.baseline_removing(y)
+    # plt.plot(x, y)
+    # plt.plot(x, base_y)
+    # plt.show()
+    import simulate
+
+    rawdata = simulate.generate_fake_signal(5, 0.1, 0.8)[:, np.newaxis]
+    plt.plot(rawdata)
     br = BaselineRemoval()
-    base_y = br.baseline_removing(y)
-    plt.plot(x, y)
-    plt.plot(x, base_y)
+    baseline = br.baseline_removing(rawdata)
+    plt.plot(baseline)
     plt.show()
